@@ -1,0 +1,54 @@
+mse version: 0.3.8
+game: magic
+stylesheet: new
+set info:
+	symbol:
+	border color: rgb(0,0,0)
+	card language: Français
+styling:
+	magic-counter:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-extended-art:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-firepenguinmaster-flip:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-firepenguinmasterpromo:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-future:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-future-split:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-future-textless: overlay:
+	magic-new:
+		artifact style: brown
+		use guild mana symbols: yes
+		text box mana symbols: magic-mana-large.mse-symbol-font
+		overlay:
+	magic-new-flip:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-new-leveler:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-new-promo:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-new-split:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-new-token:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-old:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-old-token:
+		text box mana symbols: magic-mana-small.mse-symbol-font
+		overlay:
+	magic-textless: overlay:
