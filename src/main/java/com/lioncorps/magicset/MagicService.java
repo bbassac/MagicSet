@@ -45,22 +45,22 @@ public class MagicService {
         //Get first sheet from the workbook
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
-                if(row.getRowNum()!=0 && !StringUtils.isEmpty(row.getCell(0).toString())) {
-                    Card c = CardBuilder.newCard(CellExtractor.extractBasicStringValue(row.getCell(0)))
+                if(row.getRowNum()!=0 && !StringUtils.isEmpty(row.getCell(CellExtractor.NAME).toString())) {
+                    Card c = CardBuilder.newCard(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.NAME)))
                             .hasStyle("false")
                             .notes("")
                             .borderColor("rgb(0,0,0")
-                            .cardColor(CellExtractor.extractCardColor(row.getCell(4)))
-                            .castingCost(CellExtractor.extractIntegerPart(row.getCell(6)))
+                            .cardColor(CellExtractor.extractCardColor(row.getCell(CellExtractor.NATURE_CHAKRA)))
+                            .castingCost(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.COUT)))
                             .image("")
-                            .superType(CellExtractor.extractTypeStringValue(row.getCell(2),row.getCell(3)))
+                            .superType(CellExtractor.extractTypeStringValue(row.getCell(CellExtractor.EQUIPE),row.getCell(CellExtractor.RARETE)))
                             .subType("")
                             .rarity("rare")
-                            .ruleText(CellExtractor.extractPowerStringValue(row.getCell(9)))
-                            .flavorText(CellExtractor.extractBasicStringValue(row.getCell(10)))
-                            .power(CellExtractor.extractIntegerPart(row.getCell(7)))
-                            .toughness(CellExtractor.extractIntegerPart(row.getCell(8)))
-                            .copyright("")
+                            .ruleText(CellExtractor.extractPowerStringValue(row.getCell(CellExtractor.POUVOIR)))
+                            .flavorText(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.CITATION)))
+                            .power(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.ATTAQUE)))
+                            .toughness(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.DEFENSE)))
+                            .copyright("Lioncorps")
 
                             .build();
                     toReturn.add(c);

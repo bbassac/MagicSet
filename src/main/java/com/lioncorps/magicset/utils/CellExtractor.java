@@ -6,6 +6,20 @@ import org.apache.poi.ss.usermodel.Cell;
  * Created by b.bassac on 05/04/2017.
  */
 public class CellExtractor {
+
+    public static int NAME = 0;
+    public static int TYPE = 1;
+    public static int EQUIPE = 2;
+    public static int RARETE = 3;
+    public static int NATURE_CHAKRA = 4;
+    public static int ELEMENT = 5;
+    public static int COUT = 6;
+    public static int ATTAQUE = 7;
+    public static int DEFENSE = 8;
+    public static int POUVOIR = 9;
+    public static int CITATION = 10;
+
+
     private static String CRLF = System.getProperty("line.separator");
 
     public static String extractTypeStringValue(Cell cell1, Cell cell2) {
