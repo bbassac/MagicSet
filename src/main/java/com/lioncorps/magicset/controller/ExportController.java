@@ -1,6 +1,7 @@
 package com.lioncorps.magicset.controller;
 
 import com.lioncorps.magicset.MagicService;
+import com.lioncorps.magicset.model.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,9 @@ public class ExportController {
 
         StringBuilder toReturn = new StringBuilder();
         toReturn.append(service.displayFile("classpath:headers.txt"));
-        toReturn.append(service.getCard().toString());
+        for(Card c : service.getCard()) {
+            toReturn.append(c.toString());
+        }
         toReturn.append(service.displayFile("classpath:footers.txt"));
 
         ResponseEntity<byte[]> responseEntity = buildResponseFromString(toReturn);

@@ -2,14 +2,19 @@ package com.lioncorps.magicset;
 
 import com.lioncorps.magicset.model.Card;
 import com.lioncorps.magicset.model.CardBuilder;
+
+import com.lioncorps.magicset.utils.CellExtractor;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.ArrayList;
+
+import java.util.List;
 
 /**
  * Created by b.bassac on 05/04/2017.
@@ -32,26 +37,41 @@ public class MagicService {
         return toReturn.toString();
     }
 
-    public Card getCard() {
+    public List<Card> getCard() {
+        List<Card> toReturn = new ArrayList<>();
+        try {
+            FileInputStream file = new FileInputStream(new File("D:\\TMPSET\\Jeu_Naruto.xlsx"));
+            Workbook workbook = WorkbookFactory.create(file);
+        //Get first sheet from the workbook
+            Sheet sheet = workbook.getSheetAt(0);
+            for (Row row : sheet) {
+                if(row.getRowNum()!=0 && !StringUtils.isEmpty(row.getCell(0).toString())) {
+                    Card c = CardBuilder.newCard(CellExtractor.extractBasicStringValue(row.getCell(0)))
+                            .hasStyle("false")
+                            .notes("")
+                            .borderColor("rgb(0,0,0")
+                            .cardColor(CellExtractor.extractCardColor(row.getCell(4)))
+                            .castingCost(CellExtractor.extractIntegerPart(row.getCell(6)))
+                            .image("")
+                            .superType(CellExtractor.extractTypeStringValue(row.getCell(2),row.getCell(3)))
+                            .subType("")
+                            .rarity("rare")
+                            .ruleText(CellExtractor.extractPowerStringValue(row.getCell(9)))
+                            .flavorText(CellExtractor.extractBasicStringValue(row.getCell(10)))
+                            .power(CellExtractor.extractIntegerPart(row.getCell(7)))
+                            .toughness(CellExtractor.extractIntegerPart(row.getCell(8)))
+                            .copyright("")
 
-        Card c2 = CardBuilder.newCard("Kakashi Atake")
-                .hasStyle("false")
-                .notes("")
-                .borderColor("rgb(0,0,0")
-                .cardColor("white, multicolor")
-                .castingCost("5")
-                .image("")
-                .superType("<word-list-type>Capitaine</word-list-type>")
-                .subType("")
-                .rarity("rare")
-                .ruleText("Instantané:\n" +
-                        "\t\t<sym>T</sym><i>Peut copier n’importe quel pouvoir sur le champs de bataille</i>")
-                .flavorText("")
-                .power("10")
-                .toughness("5")
-                .copyright("")
+                            .build();
+                    toReturn.add(c);
+                }
+            }
+        } catch (InvalidFormatException | IOException e) {
+            System.out.println(e);
 
-                .build();
-        return c2;
+        }
+        return toReturn;
     }
+
+
 }

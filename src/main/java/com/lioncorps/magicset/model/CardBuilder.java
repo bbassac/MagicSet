@@ -88,4 +88,14 @@ public class CardBuilder {
         this.card.setCopyright(copyright);
         return this;
     }
+
+    public CardBuilder subType2(String subType2) {
+        this.card.setSubType2(subType2);
+        return this;
+    }
+
+    public CardBuilder superType2(String superSubType2) {
+        this.card.setSuperType2(superSubType2);
+        return this;
+    }
 }
