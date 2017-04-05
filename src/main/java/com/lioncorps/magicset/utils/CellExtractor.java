@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Cell;
  */
 public class CellExtractor {
 
+    public static final String SEPARATOR = " :   ";
     public static int NAME = 0;
     public static int TYPE = 1;
     public static int EQUIPE = 2;
@@ -22,10 +23,11 @@ public class CellExtractor {
 
     private static String CRLF = System.getProperty("line.separator");
 
-    public static String extractTypeStringValue(Cell cell1, Cell cell2) {
-        if (cell1 == null) return "";
-        if (cell2 == null) return cell1.toString();
-        return cell1.toString()+" :  "+cell2.toString();
+    public static String extractTypeStringValue(Cell equipe, Cell nature, Cell element) {
+        if (equipe == null) return "";
+        if (element == null) return equipe.toString()+ SEPARATOR + nature.toString();
+        if(nature.toString().equals(element.toString())) return equipe.toString()+SEPARATOR+nature.toString();
+        return equipe.toString()+SEPARATOR+nature.toString()+" ("+element.toString()+")";
     }
 
     public static String extractBasicStringValue(Cell cell) {
@@ -72,5 +74,13 @@ public class CellExtractor {
         if (cell.toString().equals("Physique")) return "white";
         if (cell.toString().equals("Equipement")) return "black";
         return "";
+    }
+
+    public static String extractFlavorStringValue(Cell cell) {
+
+            return cell ==null ? "" : cell.toString()
+                    .replaceAll("ō","ô")
+                    .replaceAll("ū","û");
+
     }
 }
