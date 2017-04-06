@@ -8,6 +8,25 @@ import org.apache.poi.ss.usermodel.Cell;
 public class CellExtractor {
 
     public static final String SEPARATOR = " :   ";
+    //RARITY
+    public static final String RARITY_COMMON = "common";
+    public static final String RARITY_BASIC_LAND = "basic land";
+    public static final String RARITY_UNCOMMON = "uncommon";
+    public static final String RARITY_RARE = "rare";
+    public static final String RARITY_MYTHIC_RARE = "mythic rare";
+    public static final String RARITY_SPECIAL = "special";
+
+    //CARD COLORS
+    public static final String CARD_COLOR_SPECIAL = "blue,red,artifact,radial";
+    public static final String CARD_COLOR_WIND = "green";
+    public static final String CARD_COLOR_WATER = "blue";
+    public static final String CARD_COLOR_FIRE = "red";
+    public static final String CARD_COLOR_HEARTH = "black, red, land, multicolor, horizontal";
+    public static final String CARD_COLOR_THUNDER = "white, multicolor";
+    public static final String CARD_COLOR_PHYSIC = "white";
+    public static final String CARD_COLOR_EQUIPMENT = "black";
+
+    //COLUMN NUMBER
     public static int NAME = 0;
     public static int TYPE = 1;
     public static int EQUIPE = 2;
@@ -65,14 +84,14 @@ public class CellExtractor {
     }
 
     public static String extractCardColor(Cell cell) {
-        if (cell.toString().equals("Special")) return "blue,red,artifact,radial";
-        if (cell.toString().equals("Vent")) return "green";
-        if (cell.toString().equals("Eau")) return "blue";
-        if (cell.toString().equals("Feu")) return "red";
-        if (cell.toString().equals("Terre")) return "black, red, land, multicolor, horizontal";
-        if (cell.toString().equals("Foudre")) return "white, multicolor";
-        if (cell.toString().equals("Physique")) return "white";
-        if (cell.toString().equals("Equipement")) return "black";
+        if (cell.toString().equals("Special")) return CARD_COLOR_SPECIAL;
+        if (cell.toString().equals("Vent")) return CARD_COLOR_WIND;
+        if (cell.toString().equals("Eau")) return CARD_COLOR_WATER;
+        if (cell.toString().equals("Feu")) return CARD_COLOR_FIRE;
+        if (cell.toString().equals("Terre")) return CARD_COLOR_HEARTH;
+        if (cell.toString().equals("Foudre")) return CARD_COLOR_THUNDER;
+        if (cell.toString().equals("Physique")) return CARD_COLOR_PHYSIC;
+        if (cell.toString().equals("Equipement")) return CARD_COLOR_EQUIPMENT;
         return "";
     }
 
@@ -81,6 +100,17 @@ public class CellExtractor {
             return cell ==null ? "" : cell.toString()
                     .replaceAll("ō","ô")
                     .replaceAll("ū","û");
+
+    }
+
+    public static String extractRarityStringValue(Cell cell) {
+        if (cell == null ) return RARITY_COMMON;
+        if (cell.toString().equals("Invocation")) return RARITY_BASIC_LAND;
+        if (cell.toString().equals("Capitaine")) return RARITY_UNCOMMON;
+        if (cell.toString().equals("Sanin")) return RARITY_RARE;
+        if (cell.toString().equals("Kage")) return RARITY_MYTHIC_RARE;
+        if (cell.toString().equals("Jinchûriki")) return RARITY_SPECIAL;
+        return RARITY_COMMON;
 
     }
 }

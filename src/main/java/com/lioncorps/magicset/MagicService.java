@@ -55,7 +55,7 @@ public class MagicService {
                             .image("")
                             .superType(CellExtractor.extractTypeStringValue(row.getCell(CellExtractor.EQUIPE),row.getCell(CellExtractor.NATURE_CHAKRA),row.getCell(CellExtractor.ELEMENT)))
                             .subType("")
-                            .rarity("rare")
+                            .rarity(CellExtractor.extractRarityStringValue(row.getCell(CellExtractor.RARETE)))
                             .ruleText(CellExtractor.extractPowerStringValue(row.getCell(CellExtractor.POUVOIR)))
                             .flavorText(CellExtractor.extractFlavorStringValue(row.getCell(CellExtractor.CITATION)))
                             .power(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.ATTAQUE)))
