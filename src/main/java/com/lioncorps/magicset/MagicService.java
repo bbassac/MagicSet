@@ -37,10 +37,10 @@ public class MagicService {
         return toReturn.toString();
     }
 
-    public List<Card> getCard() {
+    public List<Card> loadCardsFromExcelFile(String filePath) {
         List<Card> toReturn = new ArrayList<>();
         try {
-            FileInputStream file = new FileInputStream(new File("D:\\TMPSET\\Jeu_Naruto.xlsx"));
+            FileInputStream file = new FileInputStream(new File(filePath));
             Workbook workbook = WorkbookFactory.create(file);
         //Get first sheet from the workbook
             Sheet sheet = workbook.getSheetAt(0);

@@ -1,13 +1,27 @@
 package com.lioncorps.magicset.controller;
 
 
+import com.lioncorps.magicset.MagicService;
+import com.lioncorps.magicset.model.Card;
+import com.lioncorps.magicset.utils.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,33 +33,37 @@ import java.nio.file.Paths;
 @RequestMapping("/upload")
 public class UploadController {
 
-    //Save the uploaded file to this folder
+    @Autowired
+    MagicService service;
 
-    private static String UPLOADED_FOLDER = "D://TMPSET//";
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<Resource> singleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws IOException {
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String singleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
 
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:uploadStatus";
+        FileUtils.writeFile(file);
+
+        StringBuilder toReturn = new StringBuilder();
+        toReturn.append(service.displayFile("classpath:headers.txt"));
+        for(Card c : service.loadCardsFromExcelFile(FileUtils.UPLOADED_FOLDER+file.getOriginalFilename())) {
+            toReturn.append(c.toString());
         }
+        toReturn.append(service.displayFile("classpath:footers.txt"));
 
-        try {
+        FileUtils.writeFile(toReturn, FileUtils.UPLOADED_FOLDER+"\\set");
+        FileUtils.zipFile(FileUtils.UPLOADED_FOLDER+"\\set",FileUtils.UPLOADED_FOLDER+"\\set.mse-set");
 
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-            Files.write(path, bytes);
+        File fileToReturn = new File(FileUtils.UPLOADED_FOLDER+"\\set.mse-set");
 
-            redirectAttributes.addFlashAttribute("message",
-                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDispositionFormData("attachment","set.mse-set");
+        headers.setContentLength(fileToReturn.length());
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(fileToReturn));
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(fileToReturn.length())
+                .contentType(MediaType.parseMediaType(MediaType.APPLICATION_OCTET_STREAM_VALUE))
+                .body(resource);
 
-        return "uploaded : " + file.getOriginalFilename();
     }
 }
