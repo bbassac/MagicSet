@@ -1,5 +1,8 @@
 package com.lioncorps.magicset.model;
 
+import com.lioncorps.magicset.utils.CellExtractor;
+import org.apache.poi.ss.usermodel.Row;
+
 /**
  * Created by b.bassac on 04/04/2017.
  */
@@ -32,8 +35,7 @@ public class Card {
         this.timeModified = "2017-03-02 14:46:52";
     }
 
-    @Override
-    public String toString() {
+    public String toMseCard() {
         return "card:" + CRLF +
                 "\thas styling: " + hasStyling + CRLF +
                 "\tnotes: " + notes + CRLF +
@@ -228,4 +230,24 @@ public class Card {
     }
 
 
+    public static Card convertToCard(Row row) {
+        Card c = CardBuilder.newCard(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.NAME)))
+                .hasStyle("false")
+                .notes("")
+                .borderColor("rgb(0,0,0")
+                .cardColor(CellExtractor.extractCardColor(row.getCell(CellExtractor.NATURE_CHAKRA)))
+                .castingCost(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.COUT)))
+                .image("")
+                .superType(CellExtractor.extractTypeStringValue(row.getCell(CellExtractor.EQUIPE),row.getCell(CellExtractor.NATURE_CHAKRA),row.getCell(CellExtractor.ELEMENT)))
+                .subType("")
+                .rarity(CellExtractor.extractRarityStringValue(row.getCell(CellExtractor.RARETE)))
+                .ruleText(CellExtractor.extractPowerStringValue(row.getCell(CellExtractor.POUVOIR)))
+                .flavorText(CellExtractor.extractFlavorStringValue(row.getCell(CellExtractor.CITATION)))
+                .power(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.ATTAQUE)))
+                .toughness(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.DEFENSE)))
+                .copyright("Lioncorps")
+
+                .build();
+        return c;
+    }
 }

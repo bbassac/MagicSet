@@ -25,7 +25,7 @@ public class MagicService {
     private ResourceLoader resourceLoader;
     private static String CRLF = System.getProperty("line.separator");
 
-    public String displayFile(String fileName) throws IOException {
+    public String getFileAsString(String fileName) throws IOException {
         StringBuilder toReturn = new StringBuilder();
         InputStream inputStram = resourceLoader.getResource(fileName).getInputStream();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStram, "UTF8"))) {
@@ -46,23 +46,7 @@ public class MagicService {
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
                 if(row.getRowNum()!=0 && !StringUtils.isEmpty(row.getCell(CellExtractor.NAME).toString())) {
-                    Card c = CardBuilder.newCard(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.NAME)))
-                            .hasStyle("false")
-                            .notes("")
-                            .borderColor("rgb(0,0,0")
-                            .cardColor(CellExtractor.extractCardColor(row.getCell(CellExtractor.NATURE_CHAKRA)))
-                            .castingCost(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.COUT)))
-                            .image("")
-                            .superType(CellExtractor.extractTypeStringValue(row.getCell(CellExtractor.EQUIPE),row.getCell(CellExtractor.NATURE_CHAKRA),row.getCell(CellExtractor.ELEMENT)))
-                            .subType("")
-                            .rarity(CellExtractor.extractRarityStringValue(row.getCell(CellExtractor.RARETE)))
-                            .ruleText(CellExtractor.extractPowerStringValue(row.getCell(CellExtractor.POUVOIR)))
-                            .flavorText(CellExtractor.extractFlavorStringValue(row.getCell(CellExtractor.CITATION)))
-                            .power(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.ATTAQUE)))
-                            .toughness(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.DEFENSE)))
-                            .copyright("Lioncorps")
-
-                            .build();
+                   Card c = Card.convertToCard(row);
                     toReturn.add(c);
                 }
             }

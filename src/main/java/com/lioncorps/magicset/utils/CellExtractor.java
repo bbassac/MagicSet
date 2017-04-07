@@ -17,13 +17,21 @@ public class CellExtractor {
     public static final String RARITY_SPECIAL = "special";
 
     //CARD COLORS
+    //VIOLET
     public static final String CARD_COLOR_SPECIAL = "blue,red,artifact,radial";
+    //VERT
     public static final String CARD_COLOR_WIND = "green";
+    //BLEU
     public static final String CARD_COLOR_WATER = "blue";
+    //ROUGE
     public static final String CARD_COLOR_FIRE = "red";
+    //MARRON
     public static final String CARD_COLOR_HEARTH = "black, red, land, multicolor, horizontal";
+    //JAUNE
     public static final String CARD_COLOR_THUNDER = "white, multicolor";
+    //BLANC
     public static final String CARD_COLOR_PHYSIC = "white";
+    //NOIR
     public static final String CARD_COLOR_EQUIPMENT = "black";
 
     //COLUMN NUMBER
@@ -39,6 +47,13 @@ public class CellExtractor {
     public static int POUVOIR = 9;
     public static int CITATION = 10;
 
+    public static String SYMB_ACTIVATE = "<sym>T</sym> ";
+    public static String SYMB_X_COST = "<sym>X</sym> ";
+    public static String SYMB_INSTANT = "<sym>C</sym> ";
+    public static String SYMB_INFINITE = "<sym>I</sym> ";
+    public static String SYMB_COST(int cost){
+        return "<sym>"+cost+"</sym> ";
+    }
 
     private static String CRLF = System.getProperty("line.separator");
 
@@ -62,14 +77,19 @@ public class CellExtractor {
             StringBuilder builder = new StringBuilder();
             builder.append("\r\n");
             for(String line : lines){
-                builder.append("\t\t")
-                        .append(line)
-                        .append(CRLF);
+                builder.append("\t\t").append(processMSEPower(line)).append(CRLF);
 
             }
 
             return builder.toString();
         }
+    }
+
+    private static String processMSEPower(String line) {
+        return line
+                .replaceAll("Permanent : ", SYMB_INFINITE)
+                .replaceAll("1 fois : ",SYMB_ACTIVATE)
+                .replaceAll("Instantané : ", SYMB_INSTANT);
     }
 
     public static String extractIntegerPart(Cell toParse){
@@ -109,6 +129,7 @@ public class CellExtractor {
         if (cell.toString().equals("Capitaine")) return RARITY_UNCOMMON;
         if (cell.toString().equals("Sanin")) return RARITY_RARE;
         if (cell.toString().equals("Kage")) return RARITY_MYTHIC_RARE;
+        if (cell.toString().equals("Epique")) return RARITY_MYTHIC_RARE;
         if (cell.toString().equals("Jinchûriki")) return RARITY_SPECIAL;
         return RARITY_COMMON;
 

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Created by b.bassac on 05/04/2017.
@@ -43,11 +38,11 @@ public class UploadController {
         FileUtils.writeFile(file);
 
         StringBuilder toReturn = new StringBuilder();
-        toReturn.append(service.displayFile("classpath:headers.txt"));
+        toReturn.append(service.getFileAsString("classpath:headers.txt"));
         for(Card c : service.loadCardsFromExcelFile(FileUtils.UPLOADED_FOLDER+file.getOriginalFilename())) {
-            toReturn.append(c.toString());
+            toReturn.append(c.toMseCard());
         }
-        toReturn.append(service.displayFile("classpath:footers.txt"));
+        toReturn.append(service.getFileAsString("classpath:footers.txt"));
 
         FileUtils.writeFile(toReturn, FileUtils.UPLOADED_FOLDER+"\\set");
         FileUtils.zipFile(FileUtils.UPLOADED_FOLDER+"\\set",FileUtils.UPLOADED_FOLDER+"\\set.mse-set");
