@@ -4,6 +4,7 @@ import com.lioncorps.magicset.model.Card;
 import com.lioncorps.magicset.model.CardBuilder;
 
 import com.lioncorps.magicset.utils.CellExtractor;
+import com.lioncorps.magicset.utils.MagicSetEditorUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class MagicService {
         StringBuilder toReturn = new StringBuilder();
         InputStream inputStram = resourceLoader.getResource(fileName).getInputStream();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStram, "UTF8"))) {
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
                 toReturn.append(line).append(CRLF);
             }
@@ -46,7 +47,7 @@ public class MagicService {
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
                 if(row.getRowNum()!=0 && !StringUtils.isEmpty(row.getCell(CellExtractor.NAME).toString())) {
-                   Card c = Card.convertToCard(row);
+                   Card c = MagicSetEditorUtils.convertExcelRowToCard(row);
                     toReturn.add(c);
                 }
             }

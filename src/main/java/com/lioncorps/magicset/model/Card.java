@@ -229,25 +229,4 @@ public class Card {
         this.copyright2 = copyright2;
     }
 
-
-    public static Card convertToCard(Row row) {
-        Card c = CardBuilder.newCard(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.NAME)))
-                .hasStyle("false")
-                .notes("")
-                .borderColor("rgb(0,0,0")
-                .cardColor(CellExtractor.extractCardColor(row.getCell(CellExtractor.NATURE_CHAKRA)))
-                .castingCost(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.COUT)))
-                .image("")
-                .superType(CellExtractor.extractTypeStringValue(row.getCell(CellExtractor.EQUIPE),row.getCell(CellExtractor.NATURE_CHAKRA),row.getCell(CellExtractor.ELEMENT)))
-                .subType("")
-                .rarity(CellExtractor.extractRarityStringValue(row.getCell(CellExtractor.RARETE)))
-                .ruleText(CellExtractor.extractPowerStringValue(row.getCell(CellExtractor.POUVOIR)))
-                .flavorText(CellExtractor.extractFlavorStringValue(row.getCell(CellExtractor.CITATION)))
-                .power(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.ATTAQUE)))
-                .toughness(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.DEFENSE)))
-                .copyright("Lioncorps")
-
-                .build();
-        return c;
-    }
 }
