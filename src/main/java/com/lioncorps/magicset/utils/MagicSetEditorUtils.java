@@ -42,6 +42,8 @@ public class MagicSetEditorUtils {
         return "<sym>"+cost+"</sym> ";
     }
 
+    public static int CITATION_MAX_LENGTH = 50;
+
     public static Card convertExcelRowToCard(Row row) {
         Card c = CardBuilder.newCard(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.NAME)))
                 .hasStyle("false")

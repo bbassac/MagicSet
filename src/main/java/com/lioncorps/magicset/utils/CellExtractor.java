@@ -91,11 +91,20 @@ public class CellExtractor {
     }
 
     public static String extractFlavorStringValue(Cell cell) {
+        String toReturn = cell ==null ? "" : cell.toString()
+                .replaceAll("ō","ô")
+                .replaceAll("ū","û");
+        int nbSpaceToCenter = (MagicSetEditorUtils.CITATION_MAX_LENGTH - toReturn.length())/2;
+            return "<i-flavor>"+getSpace(nbSpaceToCenter)+toReturn+"</i-flavor>";
 
-            return cell ==null ? "" : cell.toString()
-                    .replaceAll("ō","ô")
-                    .replaceAll("ū","û");
+    }
 
+    private static String getSpace(int count)
+    {
+        String space="";
+        for(int i=0;i<count;i++)
+            space+=" ";
+        return space;
     }
 
     public static String extractRarityStringValue(Cell cell) {
