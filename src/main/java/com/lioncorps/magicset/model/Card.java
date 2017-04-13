@@ -1,8 +1,5 @@
 package com.lioncorps.magicset.model;
 
-import com.lioncorps.magicset.utils.CellExtractor;
-import org.apache.poi.ss.usermodel.Row;
-
 /**
  * Created by b.bassac on 04/04/2017.
  */
@@ -29,6 +26,8 @@ public class Card {
     private String superType2 = "";
     private String subType2 = "";
     private String copyright2 = "";
+
+    private String cardType;
 
     public Card() {
         this.timeCreated = "2017-03-02 14:40:21";
@@ -227,6 +226,15 @@ public class Card {
 
     public void setCopyright2(String copyright2) {
         this.copyright2 = copyright2;
+    }
+
+    public String getCardType() {
+        return cardType;
+    }
+
+    public Card setCardType(String cardType) {
+        this.cardType = cardType;
+        return this;
     }
 
 }

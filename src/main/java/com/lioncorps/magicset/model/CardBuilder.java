@@ -98,4 +98,9 @@ public class CardBuilder {
         this.card.setSuperType2(superSubType2);
         return this;
     }
+
+    public CardBuilder cardType(String cardType){
+        this.card.setCardType(cardType);
+        return this;
+    }
 }

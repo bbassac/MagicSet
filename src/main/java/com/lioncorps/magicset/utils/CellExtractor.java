@@ -118,4 +118,8 @@ public class CellExtractor {
         return MagicSetEditorUtils.RARITY_COMMON;
 
     }
+
+    public static String extractCardType(Cell cell) {
+        return  cell ==null ? "" : cell.toString();
+    }
 }

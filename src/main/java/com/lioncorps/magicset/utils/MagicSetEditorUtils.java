@@ -49,6 +49,7 @@ public class MagicSetEditorUtils {
                 .hasStyle("false")
                 .notes("")
                 .borderColor("rgb(0,0,0")
+                .cardType(CellExtractor.extractCardType(row.getCell(CellExtractor.TYPE)))
                 .cardColor(CellExtractor.extractCardColor(row.getCell(CellExtractor.NATURE_CHAKRA)))
                 .castingCost(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.COUT)))
                 .image("")
