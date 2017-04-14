@@ -57,7 +57,7 @@ public class MagicSetEditorUtils {
                 .subType("")
                 .rarity(CellExtractor.extractRarityStringValue(row.getCell(CellExtractor.RARETE)))
                 .ruleText(CellExtractor.extractPowerStringValue(row.getCell(CellExtractor.POUVOIR)))
-                .flavorText(CellExtractor.extractFlavorStringValue(row.getCell(CellExtractor.CITATION)))
+                .flavorText(CellExtractor.extractFlavorStringValue(row.getCell(CellExtractor.CITATION),row.getCell(CellExtractor.POUVOIR)))
                 .power(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.ATTAQUE)))
                 .toughness(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.DEFENSE)))
                 .copyright("Lioncorps")

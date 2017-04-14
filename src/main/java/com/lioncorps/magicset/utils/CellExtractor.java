@@ -52,8 +52,11 @@ public class CellExtractor {
             String[] lines = powerString.split("\n");
             StringBuilder builder = new StringBuilder();
             builder.append("\r\n");
-            for(String line : lines){
-                builder.append("\t\t").append(processMSEPower(line)).append(CRLF);
+            for(int i=0;i<lines.length;i++){
+                builder.append("\t\t").append(processMSEPower(lines[i]));
+                if(i != lines.length-1){
+                    builder.append(CRLF);
+                }
 
             }
 
@@ -91,13 +94,24 @@ public class CellExtractor {
         return "";
     }
 
-    public static String extractFlavorStringValue(Cell cell) {
-        String toReturn = cell ==null ? "" : cell.toString()
+    public static String extractFlavorStringValue(Cell flavorCell,Cell powerCell) {
+        String toReturn = flavorCell ==null ? "" : flavorCell.toString()
                 .replaceAll("ō","ô")
                 .replaceAll("ū","û");
+        int nbPouvoirs = getNbPouvoirs(powerCell);
         int nbSpaceToCenter = (MagicSetEditorUtils.CITATION_MAX_LENGTH - toReturn.length())/2;
+        if (nbPouvoirs > 1) {
+            return CRLF + "\t\t<i-flavor>" + CRLF + "\t\t" + getSpace(nbSpaceToCenter) + toReturn + "</i-flavor>";
+        }
+        else{
             return "<i-flavor>"+getSpace(nbSpaceToCenter)+toReturn+"</i-flavor>";
+        }
 
+    }
+
+    private static int getNbPouvoirs(Cell powerCell) {
+        String[] lines = powerCell.toString().split("\n");
+        return lines.length;
     }
 
     private static String getSpace(int count)
