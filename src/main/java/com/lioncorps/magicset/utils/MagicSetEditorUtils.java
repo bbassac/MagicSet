@@ -65,4 +65,20 @@ public class MagicSetEditorUtils {
                 .build();
         return c;
     }
+
+    public static com.lioncorps.magicset.model.MasterCard.Card convertExcelRowToMasterCard(Row row) {
+        com.lioncorps.magicset.model.MasterCard.Card card = new com.lioncorps.magicset.model.MasterCard.Card();
+        card.setKind(CellExtractor.extractCardType(row.getCell(CellExtractor.TYPE)));
+        card.setChakra(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.NATURE_CHAKRA)));
+        card.setAttack(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.ATTAQUE)));
+        card.setCitation(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.CITATION)));
+        card.setCost(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.COUT)));
+        card.setDefense(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.DEFENSE)));
+        card.setElement(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.ELEMENT)));
+        card.setRank(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.RARETE)));
+        card.setTeam(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.EQUIPE)));
+        card.setName(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.NAME)));
+        card.setPowers(CellExtractor.extractPowers(row.getCell(CellExtractor.POUVOIR)));
+        return card;
+    }
 }

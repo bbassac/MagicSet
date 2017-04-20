@@ -1,7 +1,10 @@
 package com.lioncorps.magicset.utils;
 
+import com.lioncorps.magicset.model.MasterCard.Power;
 import org.apache.poi.ss.usermodel.Cell;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -136,5 +139,22 @@ public class CellExtractor {
 
     public static String extractCardType(Cell cell) {
         return  cell ==null ? "" : cell.toString();
+    }
+
+    public static List<Power> extractPowers(Cell cell) {
+        List<Power> toReturn = new ArrayList<>();
+        if(cell!=null) {
+            String powerString = cell.toString();
+            String[] lines = powerString.split("\n");
+
+            for(int i=0;i<lines.length;i++){
+                Power p = new Power();
+                p.setDescription(lines[i]);
+                toReturn.add(p);
+            }
+
+
+        }
+        return toReturn;
     }
 }

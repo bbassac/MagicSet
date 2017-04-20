@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by b.bassac on 05/04/2017.
@@ -39,12 +40,15 @@ public class UploadController {
 
         StringBuilder toReturn = new StringBuilder();
         toReturn.append(service.getFileAsString("classpath:headers.txt"));
-        for(Card c : service.loadCardsFromExcelFile(FileUtils.UPLOADED_FOLDER+file.getOriginalFilename())) {
+        List<Card> cardList = service.loadCardsFromExcelFile(FileUtils.UPLOADED_FOLDER + file.getOriginalFilename());
+        for(Card c : cardList) {
             toReturn.append(c.toMseCard());
         }
         toReturn.append(service.getFileAsString("classpath:footers.txt"));
 
-        FileUtils.writeFile(toReturn, FileUtils.UPLOADED_FOLDER+"\\set");
+        FileUtils.writeFile(service.loadMasterCardsFromExcelFile(FileUtils.UPLOADED_FOLDER + file.getOriginalFilename()),FileUtils.UPLOADED_FOLDER+"\\Naruto.json" );
+
+        FileUtils.writeFile(toReturn.toString(), FileUtils.UPLOADED_FOLDER+"\\set");
         FileUtils.zipFile(FileUtils.UPLOADED_FOLDER+"\\set",FileUtils.UPLOADED_FOLDER+"\\set.mse-set");
 
         File fileToReturn = new File(FileUtils.UPLOADED_FOLDER+"\\set.mse-set");

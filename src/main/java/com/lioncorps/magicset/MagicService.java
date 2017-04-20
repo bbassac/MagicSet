@@ -1,8 +1,12 @@
 package com.lioncorps.magicset;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.lioncorps.magicset.model.Card;
 import com.lioncorps.magicset.model.CardBuilder;
 
+import com.lioncorps.magicset.model.MasterCard.CardProject;
 import com.lioncorps.magicset.utils.CellExtractor;
 import com.lioncorps.magicset.utils.MagicSetEditorUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -56,6 +60,33 @@ public class MagicService {
 
         }
         return toReturn;
+    }
+
+    public String loadMasterCardsFromExcelFile(String filePath) throws JsonProcessingException {
+        CardProject project = new CardProject();
+        try {
+            FileInputStream file = new FileInputStream(new File(filePath));
+            Workbook workbook = WorkbookFactory.create(file);
+            //Get first sheet from the workbook
+            Sheet sheet = workbook.getSheetAt(0);
+            for (Row row : sheet) {
+                if(row.getRowNum()!=0 && !StringUtils.isEmpty(row.getCell(CellExtractor.NAME).toString())) {
+                    com.lioncorps.magicset.model.MasterCard.Card c = MagicSetEditorUtils.convertExcelRowToMasterCard(row);
+                    project.getCards().add(c);
+                }
+            }
+        } catch (InvalidFormatException | IOException e) {
+            System.out.println(e);
+
+        }
+
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String uniJSON = mapper.writeValueAsString(project);
+        return uniJSON;
+
     }
 
 

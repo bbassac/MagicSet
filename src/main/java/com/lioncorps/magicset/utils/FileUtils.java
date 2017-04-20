@@ -15,11 +15,11 @@ import java.util.zip.ZipOutputStream;
 public class FileUtils {
     public static String UPLOADED_FOLDER = "D://TMPSET//";
 
-    public static void writeFile(StringBuilder toReturn, String outputFullPath) throws IOException {
+    public static void writeFile(String toReturn, String outputFullPath) throws IOException {
         Writer out = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(outputFullPath), "UTF-8"));
         try {
-            out.write(toReturn.toString());
+            out.write(toReturn);
         } finally {
             out.close();
         }
