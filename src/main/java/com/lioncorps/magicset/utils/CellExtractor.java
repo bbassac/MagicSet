@@ -40,6 +40,7 @@ public class CellExtractor {
         if (element == null) return equipe.toString()+ SEPARATOR + nature.toString();
         if(nature.toString().equals(element.toString())) return equipe.toString()+SEPARATOR+nature.toString();
         if(nature.toString().equals("Environnement")) return  equipe.toString()+SEPARATOR+element.toString();
+        if(nature.toString().equals("Lieu légendaire")) return  equipe.toString()+SEPARATOR+element.toString();
         return equipe.toString()+SEPARATOR+nature.toString()+" ("+element.toString()+")";
     }
 
