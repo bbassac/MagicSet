@@ -41,6 +41,7 @@ public class CellExtractor {
         if(nature.toString().equals(element.toString())) return equipe.toString()+SEPARATOR+nature.toString();
         if(nature.toString().equals("Environnement")) return  equipe.toString()+SEPARATOR+element.toString();
         if(nature.toString().equals("Lieu légendaire")) return  equipe.toString()+SEPARATOR+element.toString();
+        if(nature.toString().equals("Quête")) return  nature.toString();
         return equipe.toString()+SEPARATOR+nature.toString()+" ("+element.toString()+")";
     }
 
@@ -104,12 +105,9 @@ public class CellExtractor {
                 .replaceAll("ū","û");
         int nbPouvoirs = getNbPouvoirs(powerCell);
         int nbSpaceToCenter = (MagicSetEditorUtils.CITATION_MAX_LENGTH - toReturn.length())/2;
-        if (nbPouvoirs > 1) {
-            return CRLF + "\t\t<i-flavor>" + CRLF + "\t\t" + getSpace(nbSpaceToCenter) + toReturn + "</i-flavor>";
-        }
-        else{
-            return "<i-flavor>"+getSpace(nbSpaceToCenter)+toReturn+"</i-flavor>";
-        }
+
+        return "<i-flavor>"+getSpace(nbSpaceToCenter)+toReturn+"</i-flavor>";
+
 
     }
 
