@@ -16,7 +16,14 @@ public class CellExtractor {
     public static final String PERMANENT = "Permanent : ";
     public static final String UNEFOIS = "1 fois : ";
     public static final String INSTANTANE = "Instantané : ";
+    public static final String CONDITIONS = "Conditions";
+    public static final String RECOMPENSE = "Récompense";
 
+    public static final String C_PERMANENT = "Permanent";
+    public static final String C_UNEFOIS = "1 fois";
+    public static final String C_INSTANTANE = "Instantané";
+    public static final String C_CONDITIONS = "Conditions";
+    public static final String C_RECOMPENSE = "Récompense";
 
     //COLUMN NUMBER
     public static int NAME = 0;
@@ -148,12 +155,21 @@ public class CellExtractor {
 
             for(int i=0;i<lines.length;i++){
                 Power p = new Power();
-                p.setDescription(lines[i]);
+                p.setDescription(processMasterCardPower(lines[i]));
                 toReturn.add(p);
             }
 
 
         }
         return toReturn;
+    }
+
+    private static String processMasterCardPower(String line) {
+        return line
+                .replaceAll(C_PERMANENT, "<<"+C_PERMANENT+">>")
+                .replaceAll(C_UNEFOIS, "<<"+"activate"+">>")
+                .replaceAll(C_INSTANTANE, "<<"+C_INSTANTANE+">>")
+                .replaceAll(C_CONDITIONS, "<<"+C_CONDITIONS+">>")
+                .replaceAll(C_RECOMPENSE, "<<"+C_RECOMPENSE+">>");
     }
 }
