@@ -19,11 +19,18 @@ public class CellExtractor {
     public static final String CONDITIONS = "Conditions";
     public static final String RECOMPENSE = "Récompense";
 
-    public static final String C_PERMANENT = "Permanent";
-    public static final String C_UNEFOIS = "1 fois";
-    public static final String C_INSTANTANE = "Instantané";
-    public static final String C_CONDITIONS = "Conditions";
-    public static final String C_RECOMPENSE = "Récompense";
+    public static final String C_PERMANENT = "Permanent : ";
+    public static final String C_PERMANENT_TAG = "<<Permanent>>  ";
+    public static final String C_UNEFOIS = "1 fois : ";
+    public static final String C_UNEFOIS_TAG = "<<activate>>  ";
+    public static final String C_INSTANTANE = "Instantané : ";
+    public static final String C_INSTANTANE_TAG = "<<Instantané>>  ";
+    public static final String C_CONDITIONS = "Conditions : ";
+    public static final String C_CONDITIONS_TAG = "<<Conditions>>  ";
+    public static final String C_RECOMPENSE = "Récompense : ";
+    public static final String C_RECOMPENSE_TAG = "<<Récompense>>  ";
+    public static final String C_SPECIAL = "Spécial : ";
+    public static final String C_SPECIAL_TAG = "<<Spécial>>  ";
 
     //COLUMN NUMBER
     public static int NAME = 0;
@@ -166,10 +173,11 @@ public class CellExtractor {
 
     private static String processMasterCardPower(String line) {
         return line
-                .replaceAll(C_PERMANENT, "<<"+C_PERMANENT+">>")
-                .replaceAll(C_UNEFOIS, "<<"+"activate"+">>")
-                .replaceAll(C_INSTANTANE, "<<"+C_INSTANTANE+">>")
-                .replaceAll(C_CONDITIONS, "<<"+C_CONDITIONS+">>")
-                .replaceAll(C_RECOMPENSE, "<<"+C_RECOMPENSE+">>");
+                .replaceAll(C_PERMANENT, C_PERMANENT_TAG)
+                .replaceAll(C_UNEFOIS, C_UNEFOIS_TAG)
+                .replaceAll(C_INSTANTANE,C_INSTANTANE_TAG)
+                .replaceAll(C_CONDITIONS,C_CONDITIONS_TAG)
+                .replaceAll(C_SPECIAL,C_SPECIAL_TAG)
+                .replaceAll(C_RECOMPENSE, C_RECOMPENSE_TAG);
     }
 }
