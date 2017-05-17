@@ -80,7 +80,7 @@ public class MagicSetEditorUtils {
         card.setName(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.NAME)));
         card.setPowers(CellExtractor.extractPowers(row.getCell(CellExtractor.POUVOIR)));
         card.setComments(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.COMMENTAIRES)));
-        card.setCount(CellExtractor.extractInteger(row.getCell(CellExtractor.NOMBRE)));
+        card.setNb(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.NOMBRE)));
         return card;
     }
 }
