@@ -44,7 +44,8 @@ public class CellExtractor {
     public static int DEFENSE = 8;
     public static int POUVOIR = 9;
     public static int CITATION = 10;
-
+    public static int COMMENTAIRES = 11;
+    public static int NOMBRE = 12;
 
 
     private static String CRLF = System.getProperty("line.separator");
@@ -179,5 +180,9 @@ public class CellExtractor {
                 .replaceAll(C_CONDITIONS,C_CONDITIONS_TAG)
                 .replaceAll(C_SPECIAL,C_SPECIAL_TAG)
                 .replaceAll(C_RECOMPENSE, C_RECOMPENSE_TAG);
+    }
+
+    public static int extractInteger(Cell cell) {
+        return (int) cell.getNumericCellValue();
     }
 }

@@ -79,6 +79,8 @@ public class MagicSetEditorUtils {
         card.setTeam(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.EQUIPE)));
         card.setName(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.NAME)));
         card.setPowers(CellExtractor.extractPowers(row.getCell(CellExtractor.POUVOIR)));
+        card.setComments(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.COMMENTAIRES)));
+        card.setCount(CellExtractor.extractInteger(row.getCell(CellExtractor.NOMBRE)));
         return card;
     }
 }
