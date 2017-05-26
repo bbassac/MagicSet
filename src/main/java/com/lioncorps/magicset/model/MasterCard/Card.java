@@ -13,7 +13,7 @@ public class Card {
    private String Chakra;
    private String Citation;
    private String Comments;
-   private String Nb;
+   private int Nb;
    private String Cost;
    private String Defense;
    private String Element;
@@ -69,9 +69,9 @@ public class Card {
     }
 
     @JsonProperty("Nb")
-    public String getNb() { return Nb;  }
+    public int getNb() { return Nb;  }
     @JsonProperty("Nb")
-    public void setNb(String nb) { Nb = nb;    }
+    public void setNb(int nb) { Nb = nb;    }
 
     @JsonProperty("Cost")
     public String getCost() {
