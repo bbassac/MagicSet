@@ -2,6 +2,7 @@ package com.lioncorps.magicset.utils;
 
 import com.lioncorps.magicset.model.Card;
 import com.lioncorps.magicset.model.CardBuilder;
+import com.lioncorps.magicset.model.MasterCard.Background;
 import org.apache.poi.ss.usermodel.Row;
 
 /**
@@ -81,6 +82,7 @@ public class MagicSetEditorUtils {
         card.setPowers(CellExtractor.extractPowers(row.getCell(CellExtractor.POUVOIR)));
         card.setComments(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.COMMENTAIRES)));
         card.setNb(Integer.valueOf(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.NOMBRE))));
+        card.setBackSide(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.BACKSIDE)));
         return card;
     }
 }

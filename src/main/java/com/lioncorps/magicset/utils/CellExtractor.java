@@ -46,7 +46,7 @@ public class CellExtractor {
     public static int CITATION = 10;
     public static int COMMENTAIRES = 11;
     public static int NOMBRE = 12;
-
+    public static int BACKSIDE = 13;
 
     private static String CRLF = System.getProperty("line.separator");
 
