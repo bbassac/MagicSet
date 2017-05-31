@@ -47,6 +47,7 @@ public class CellExtractor {
     public static int COMMENTAIRES = 11;
     public static int NOMBRE = 12;
     public static int BACKSIDE = 13;
+    public static int SKINNAME = 14;
 
     private static String CRLF = System.getProperty("line.separator");
 
