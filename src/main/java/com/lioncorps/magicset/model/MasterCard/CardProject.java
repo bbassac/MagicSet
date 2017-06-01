@@ -15,12 +15,6 @@ public class CardProject {
     }
     private List<Card> Cards;
 
-
-    private String ImagesDirectory = "F:\\\\Programmation\\\\VBA\\\\Cartes Bruno\\\\Cartes\\\\Images";
-
-
-    private String TexturesDirectory = "F:\\\\Programmation\\\\VBA\\\\Cartes Bruno\\\\Cartes\\\\Textures";
-
     @JsonProperty("Cards")
     public List<Card> getCards() {
         return Cards;
@@ -30,25 +24,5 @@ public class CardProject {
         Cards = cards;
         return this;
     }
-    @JsonProperty("ImagesDirectory")
-    public String getImagesDirectory() {
-        return ImagesDirectory;
-    }
 
-    @JsonProperty("ImagesDirectory")
-    public CardProject setImagesDirectory(String imagesDirectory) {
-        ImagesDirectory = imagesDirectory;
-        return this;
-    }
-
-    @JsonProperty("TexturesDirectory")
-    public String getTexturesDirectory() {
-        return TexturesDirectory;
-    }
-
-    @JsonProperty("TexturesDirectory")
-    public CardProject setTexturesDirectory(String texturesDirectory) {
-        TexturesDirectory = texturesDirectory;
-        return this;
-    }
 }

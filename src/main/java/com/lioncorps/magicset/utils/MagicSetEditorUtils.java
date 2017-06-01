@@ -83,7 +83,8 @@ public class MagicSetEditorUtils {
         card.setComments(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.COMMENTAIRES)));
         card.setNb(Integer.valueOf(CellExtractor.extractIntegerPart(row.getCell(CellExtractor.NOMBRE))));
         card.setBackSide(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.BACKSIDE)));
-        card.setSkinName(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.SKINNAME)));
+        card.setBackSkinName(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.BACKSKINNAME)));
+        card.setFrontSkinName(CellExtractor.extractBasicStringValue(row.getCell(CellExtractor.FRONTSKINNAME)));
         return card;
     }
 }

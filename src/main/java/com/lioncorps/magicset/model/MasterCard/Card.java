@@ -23,7 +23,8 @@ public class Card {
    private String Team;
    private List<Power> powers;
    private String BackSide;
-   private String SkinName;
+   private String BackSkinName;
+   private String FrontSkinName;
 
    @JsonProperty("Attack")
     public String getAttack() {
@@ -52,13 +53,22 @@ public class Card {
         BackSide = backside;
     }
 
-    @JsonProperty("SkinName")
-    public String getSkinName() {
-        return SkinName;
+    @JsonProperty("FrontSkinName")
+    public String getFrontSkinName() {
+        return FrontSkinName;
     }
-    @JsonProperty("SkinName")
-    public void setSkinName(String skinName) {
-        SkinName = skinName;
+    @JsonProperty("FrontSkinName")
+    public void setFrontSkinName(String frontSkinName) {
+        FrontSkinName = frontSkinName;
+    }
+
+    @JsonProperty("BackSkinName")
+    public String getBackSkinName() {
+        return BackSkinName;
+    }
+    @JsonProperty("BackSkinName")
+    public void setBackSkinName(String backSkinName) {
+        BackSkinName = backSkinName;
     }
 
     @JsonProperty("Chakra")
